@@ -51,11 +51,13 @@ fastnum$square(5)
 
 ### Random Number Generation
 
-By default, `fastnum`’s submodule `random` contains the function to
-generate random numbers
+`fastnum`’s submodule `random` contains the function to generate random
+numbers. By default, it depends on Boost’s probability distribution
+library and `{dqrng}`’s fast pseudo random number generator.
 
 ``` r
+set.seed(123)
 fastnum$random$draw$normal(10L)
-#>  [1]  0.45902195 -0.06328724  0.22979815  0.34458847  0.90005182 -0.37850851
-#>  [7] -1.66049531 -2.61077200 -1.86209004 -0.38260629
+#>  [1] -0.84261734  0.11714644 -0.02699628 -0.77240142 -1.42960313 -0.91115376
+#>  [7]  0.20852974 -1.02841980  0.31423014 -0.36288550
 ```
