@@ -1,0 +1,56 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+# fastnum: Collection of fast numerical computation tools in R
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`{fastnum}` is a collection of tools and functions for numerical computation and scientific computing using C++ at its core. This includes probability distributions, generation of random numbers, and tools for functional programming. This is still an R package, not CRAN-style, rather a module that must be accessed through `{box}` R package. 
+
+## Installation
+
+You need to install `carrier` first. See the [installation guide](https://joshuamarie.com/carrier/installation.html) for the details. 
+
+The package has no pre-built binaries yet, so the installation of `fastnum` has to be built from scratch. 
+
+``` bash
+carrier install gh:joshuamarie/fastnum-module --install-deps
+```
+
+## Usage
+
+You can't use `fastnum` by loading it through `library()` or `::`, you need `{box}` R package. Currently, the current version of `{box}` cannot import `fastnum` being managed by `carrier`, you have to install the patched forked version of `{box}` (see [details](https://joshuamarie.com/carrier/installation.html#the-box-fork)). 
+
+```{r}
+box::use(fastnum)
+```
+
+### Standard Math Module
+
+`fastnum` has collection of mathematical functions, some were imported from the base R itself. 
+
+```{r}
+fastnum$square(5)
+```
+
+### Random Number Generation
+
+By default, `fastnum`'s submodule `random` contains the function to generate random numbers
+
+```{r}
+fastnum$random$draw$normal(10L)
+```
+
+
+

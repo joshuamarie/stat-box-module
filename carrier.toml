@@ -1,0 +1,23 @@
+[module]
+name = "fastnum"
+version = "0.1.0"
+description = "Collection of fast numerical computation tools in R"
+authors = [
+    { name = "Joshua Marie", email = "joshua.marie.k@gmail.com" },
+]
+license = "mit"
+r_version = "4.0.0"
+# src = "fastnum/"
+
+[package_deps]
+rlang = ">=1.1.0"
+
+[module_deps]
+
+[native]
+paths = ["cpp/", "random/core-cpp/"]         
+build_deps = { Rcpp = "*", BH = "*", dqrng = "*" }
+
+[test]
+framework = "testthat"
+dir = "tests"
