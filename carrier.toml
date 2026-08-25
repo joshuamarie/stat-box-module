@@ -7,7 +7,7 @@ authors = [
 ]
 license = "mit"
 r_version = "4.0.0"
-src = "fastnum/"                 # The module is renamed, keep this temporarily
+# src = "statmodule/"                 
 
 [package_deps]
 rlang = ">=1.1.0"
@@ -15,7 +15,7 @@ rlang = ">=1.1.0"
 [module_deps]
 
 [native]
-paths = ["cpp/", "random/core-cpp/"]         
+path = ["cpp/", "random/core-cpp/"]         
 build_deps = { Rcpp = "*", BH = "*", dqrng = "*" }
 
 [test]
