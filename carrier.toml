@@ -1,13 +1,13 @@
 [module]
-name = "fastnum"
+name = "statmodule"
 version = "0.1.0"
-description = "Collection of fast numerical computation tools in R"
+description = "Collection of statistical methods in `{box}` module form in R"
 authors = [
     { name = "Joshua Marie", email = "joshua.marie.k@gmail.com" },
 ]
 license = "mit"
 r_version = "4.0.0"
-# src = "fastnum/"
+src = "fastnum/"                 # The module is renamed, keep this temporarily
 
 [package_deps]
 rlang = ">=1.1.0"
