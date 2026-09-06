@@ -24,4 +24,5 @@
 # Build directories
 .lib/
 ^.lib/
+*.lib/
 *.tar.gz
