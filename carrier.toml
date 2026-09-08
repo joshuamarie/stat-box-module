@@ -1,7 +1,7 @@
 [module]
 name = "statmodule"
 version = "0.1.0"
-description = "Collection of statistical methods in `{box}` module form in R"
+description = "Collection of statistical methods in R. This is a `{box}` module and can be only attached through `box::use()`, not on any means like `library()`. "
 authors = [
     { name = "Joshua Marie", email = "joshua.marie.k@gmail.com" },
 ]
@@ -11,6 +11,7 @@ r_version = "4.0.0"
 
 [package_deps]
 rlang = ">=1.1.0"
+tabstats = ">=0.2.1"
 
 [module_deps]
 
@@ -18,6 +19,6 @@ rlang = ">=1.1.0"
 path = ["cpp/", "random/core-cpp/"]         
 build_deps = { Rcpp = "*", BH = "*", dqrng = "*" }
 
-[test]
-framework = "testthat"
-dir = "tests"
+# [test]
+# framework = "testthat"
+# dir = "tests"
