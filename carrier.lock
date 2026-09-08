@@ -2,6 +2,56 @@ version = 1
 r_version = "4.5.1"
 
 [[package]]
+name = "cli"
+version = "3.6.3"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "glue"
+version = "1.8.1"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "lifecycle"
+version = "1.0.5"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "magrittr"
+version = "2.0.5"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "pillar"
+version = "1.11.1"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "pkgconfig"
+version = "2.0.3"
+repo = "https://cloud.r-project.org"
+
+[[package]]
 name = "rlang"
 version = "1.3.0"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "tabstats"
+version = "0.2.1"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "tibble"
+version = "3.3.1"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "utf8"
+version = "1.2.6"
+repo = "https://cloud.r-project.org"
+
+[[package]]
+name = "vctrs"
+version = "0.7.3"
 repo = "https://cloud.r-project.org"
