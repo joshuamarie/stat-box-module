@@ -5,6 +5,7 @@
 .DS_Store
 .quarto
 *.Rproj
+.Rbuildignore
 
 # Prerequisites
 *.d 
