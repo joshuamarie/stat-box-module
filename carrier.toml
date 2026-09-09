@@ -20,8 +20,13 @@ tidyselect = "*"
 [module_deps]
 
 [native]
-path = ["cpp/", "random/core-cpp/"]         
-build_deps = { Rcpp = "*", BH = "*", dqrng = "*" }
+path = ["random/core-cpp/", "regression/src"]         
+
+[native.build_deps]
+Rcpp = "*"
+RcppEigen = "*"
+BH = "*"
+dqrng = "*"
 
 # [test]
 # framework = "testthat"
