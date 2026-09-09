@@ -5,7 +5,8 @@ box::use(
     purrr[map_dbl, map2_dbl], 
     dplyr[bind_cols, tbl = tibble, select, mutate],
     tidyselect[eval_select], 
-    stats[pt, model.frame, model.response]
+    stats[pt, model.frame, model.response], 
+    ./hook[dll], 
 )
 
 coef_lr = function (y, X) {
@@ -43,27 +44,7 @@ t_stat = function (est, se) {
 }
 
 vif = function (X) {
-    X = as.matrix(X)
-    p = ncol(X)
-    
-    vif_values = map_dbl(
-        1 : p, function (i) {
-            X_curr = X[, i, drop = FALSE]
-            X_other = cbind(1, X[, -i, drop = FALSE])
-            
-            coefs_vif = (t(X_other) * X_other) ^ -1 * (t(X_other) * X_curr)
-            y_hat_vif = X_other * coefs_vif
-            
-            mu_y = mean(X_curr)
-            ssr = sum((y_hat_vif - mu_y)^2)
-            sst = sum((X_curr - mu_y)^2)
-            r_squared = ssr / sst
-            
-            1 / (1 - r_squared)
-        }
-    )
-    
-    vif_values
+    .Call(dll$vif_score, as.matrix(X))
 }
 
 #' Custom Linear Regression Model
