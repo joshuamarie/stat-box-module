@@ -1,5 +1,5 @@
 #' @export
 box::use(
-    ./random, 
-    ./regression, 
+    . / random,
+    . / regression,
 )

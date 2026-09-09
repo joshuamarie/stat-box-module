@@ -1,12 +1,12 @@
-box::use(./hook[dll])
+box::use(. / hook[dll])
 
 #' Calling native code example 4: Random Number Generator for Uniform Distribution
 #'
 #' Template function that calls into the module's compiled code.
 #'
 #' @param n Number of samples being drawn.
-#' @param min The lower limit of the distribution. 
-#' @param max The upper limit of the distribution. 
+#' @param min The lower limit of the distribution.
+#' @param max The upper limit of the distribution.
 #'
 #' @return Uniformly distributed numbers
 #'
@@ -20,8 +20,8 @@ uniform = function(n, min = 0, max = 1) {
 #' Template function that calls into the module's compiled code.
 #'
 #' @param n Number of samples being drawn.
-#' @param mean The population mean of the distribution. 
-#' @param sd The population standard deviation of the distribution. 
+#' @param mean The population mean of the distribution.
+#' @param sd The population standard deviation of the distribution.
 #'
 #' @return Normally distributed numbers
 #'
