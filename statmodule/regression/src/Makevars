@@ -1,0 +1,3 @@
+PKG_CXXFLAGS = -I"$(shell "${R_HOME}/bin/Rscript" -e "cat(system.file('include', package = 'Rcpp'))")" \
+               -I"$(shell "${R_HOME}/bin/Rscript" -e "cat(system.file('include', package = 'RcppEigen'))")" \
+               -I"$(shell "${R_HOME}/bin/Rscript" -e "cat(system.file('include', package = 'BH'))")"
