@@ -1,4 +1,4 @@
 #' @export
 box::use(
-    ./linear,
+    ./ols,
 )
