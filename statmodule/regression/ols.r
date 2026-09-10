@@ -10,17 +10,12 @@ box::use(
 )
 
 coef_lr = function(y, X) {
-    Xt = cbind(1, X)
-    y = as.matrix(y)
+    X = as.matrix(X)
+    y = as.numeric(unlist(y))
 
-    if (ncol(y) > 1) {
-        abort('The response variable `y` must contain only 1 variable')
-    }
-
-    coefs = (t(Xt) * Xt)^-1 * (t(Xt) * y)
+    coefs = .Call("coef_calc", X, y)
     coef_names = c("beta0", colnames(X))
     names(coefs) = coef_names
-
     coefs
 }
 
