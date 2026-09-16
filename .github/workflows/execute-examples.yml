@@ -22,21 +22,25 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            # Linux & macOS uses bash installer
-            - name: "Carrier installation (Unix)"
-              if: runner.os != 'Windows'
-              shell: bash
-              run: |
-                  curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh \
-                    | sed 's/arch=\$(uname -m)/arch=aarch64/' \
-                    | bash
+            # # Linux & macOS uses bash installer
+            # - name: "Carrier installation (Unix)"
+            #   if: runner.os != 'Windows'
+            #   shell: bash
+            #   run: |
+            #       curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh \
+            #         | sed 's/arch=\$(uname -m)/arch=aarch64/' \
+            #         | bash
 
-            # Official PowerShell installer for Windows
-            - name: "Carrier installation (Windows)"
-              if: runner.os == 'Windows'
-              shell: pwsh
-              run: |
-                  irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
+            # # Official PowerShell installer for Windows
+            # - name: "Carrier installation (Windows)"
+            #   if: runner.os == 'Windows'
+            #   shell: pwsh
+            #   run: |
+            #       irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
+
+            - name: "Carrier installation"
+              shell: bash
+              run: curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh | bash
 
             - name: "R 4.5.1 Setup"
               uses: r-lib/actions/setup-r@v2
