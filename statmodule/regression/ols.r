@@ -13,24 +13,26 @@ coef_lr = function(y, X) {
     X = as.matrix(X)
     y = as.numeric(unlist(y))
 
-    coefs = .Call("coef_calc", X, y)
+    coefs = .Call(dll$coef_calc, X, y)
     coef_names = c("beta0", colnames(X))
     names(coefs) = coef_names
     coefs
 }
 
 standard_error = function(y, X, coefs) {
-    X = cbind(1, X)
-    n = nrow(X)
-    p = ncol(X)
-    y_hat = X * coefs
-    e = y - y_hat
-    rss = t(e) * e
-
-    var_coef = as.double(rss / (n - p))
-    cov_mat = var_coef * (t(X) * X)^-1
-    se_coef = sqrt(diag(cov_mat))
-    se_coef
+    # X = cbind(1, X)
+    # n = nrow(X)
+    # p = ncol(X)
+    # y_hat = X * coefs
+    # e = y - y_hat
+    # rss = t(e) * e
+    #
+    # var_coef = as.double(rss / (n - p))
+    # cov_mat = var_coef * (t(X) * X)^-1
+    # se_coef = sqrt(diag(cov_mat))
+    # se_coef
+    X = as.matrix(X)
+    .Call(dll$se_calc, X, y, coefs)
 }
 
 t_stat = function(est, se) {
@@ -96,10 +98,11 @@ linear_reg.data.frame = function(obj, x, y, ...) {
     x_expr = enexpr(x)
 
     if (is_formula(x_expr)) {
+        environment(x) = environment()
         dat = model.frame(x, data = obj)
         X = select(dat, -1)
         y = model.response(dat)
-        out = linear_reg.default(X, y)
+        out = linear_reg.default(X, y, ...)
     } else {
         X = select(obj, {{ x }})
         y = select(obj, {{ y }})
@@ -112,6 +115,7 @@ linear_reg.data.frame = function(obj, x, y, ...) {
 #' @rdname linear_reg
 #' @param data A data frame containing the variables in the formula.
 linear_reg.formula = function(obj, data, ...) {
+    environment(obj) = environment()
     dat = model.frame(obj, data = data)
     X = select(dat, -1)
     y = model.response(dat)
@@ -158,11 +162,9 @@ linear_reg.default = function(obj, y, vif = FALSE, ...) {
     res
 }
 
-print.linear_reg = function(x, ...) {
-    out = mutate(x$out, across(where(is.numeric), \(x) round(x, digits = 2)))
-
+print.linear_reg = function(x, digits = 2, ...) {
     cat("\n Custom Linear Regression output: \n\n")
-    draw_table(out, ...)
+    draw_table(out, digits = digits, ...)
     cat("\n\n")
 }
 
