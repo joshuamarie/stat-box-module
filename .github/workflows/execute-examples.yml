@@ -20,15 +20,13 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            # ---------- Carrier installation ----------
             # Linux & macOS uses bash installer
             - name: "Carrier installation (Unix)"
               if: runner.os != 'Windows'
               shell: bash
               run: |
-                  # Temporary workaround for the arm64 vs aarch64 naming mismatch
                   curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh \
-                    | sed 's/arm64-apple-darwin/aarch64-apple-darwin/g' \
+                    | sed 's/arch=\$(uname -m)/arch=aarch64/' \
                     | bash
 
             # Official PowerShell installer for Windows
@@ -54,7 +52,7 @@ jobs:
               run: |
                   # Make sure carrier is on PATH (especially important on Windows / Git Bash)
                   export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
-                  carrier --version || true          # optional sanity check
+                  carrier --version || true
                   carrier install . --install-deps
 
             - name: "Execute scripts from scripts/examples"
