@@ -38,12 +38,21 @@ jobs:
             #   run: |
             #       irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
 
-            - name: "Carrier installation"
+            # Linux & macOS
+            - name: "Carrier installation (Unix)"
+              if: runner.os != 'Windows'
               shell: bash
               run: |
                   curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh \
                     | sed 's/arch=\$(uname -m)/arch=aarch64/' \
                     | bash
+            
+            # Windows
+            - name: "Carrier installation (Windows)"
+              if: runner.os == 'Windows'
+              shell: pwsh
+              run: |
+                  irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
 
             - name: "R 4.5.1 Setup"
               uses: r-lib/actions/setup-r@v2
