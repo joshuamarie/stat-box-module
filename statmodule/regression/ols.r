@@ -164,7 +164,7 @@ linear_reg.default = function(obj, y, vif = FALSE, ...) {
 
 print.linear_reg = function(x, digits = 2, ...) {
     cat("\n Custom Linear Regression output: \n\n")
-    draw_table(out, digits = digits, ...)
+    draw_table(x$out, digits = digits, ...)
     cat("\n\n")
 }
 
