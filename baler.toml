@@ -28,6 +28,9 @@ RcppEigen = "*"
 BH = "*"
 dqrng = "*"
 
+[extras]
+bench = "*"
+
 # [tool.test]
 # framework = "testthat"
 # dir = "tests"
