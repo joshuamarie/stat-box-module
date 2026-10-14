@@ -1,15 +1,15 @@
-[module]
+[project]
 name = "statmodule"
 version = "0.1.0"
-description = "Collection of statistical methods in R. This is a `{box}` module and can be only attached through `box::use()`, not on any means like `library()`. "
+description = "Collection of statistical methods in R. This is a `{box}` module and can be only attached through `box::use()`, not on any means like `library()`."
 authors = [
     { name = "Joshua Marie", email = "joshua.marie.k@gmail.com" },
 ]
-license = "mit"
-r_version = "4.0.0"
-# src = "statmodule/"                 
+license = "MIT"
+r_version = ">=4.0.0"
+# src = "statmodule"
 
-[package_deps]
+[dependencies]
 rlang = ">=1.1.0"
 tabstats = ">=0.2.1"
 cli = ">=3.6.3"
@@ -17,18 +17,17 @@ purrr = "*"
 dplyr = ">=1.1.0"
 tidyselect = "*"
 
-[module_deps]
+[compiled-code]
+path = ["random/core-cpp/", "regression/src"]
+binary = true
+keep_source = false
 
-[native]
-path = ["random/core-cpp/", "regression/src"]         
-
-[native.build_deps]
+[compiled-code.build_deps]
 Rcpp = "*"
 RcppEigen = "*"
 BH = "*"
-sitmo = "*"
 dqrng = "*"
 
-# [test]
+# [tool.test]
 # framework = "testthat"
 # dir = "tests"
