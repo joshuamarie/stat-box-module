@@ -16,6 +16,7 @@ cli = ">=3.6.3"
 purrr = "*"
 dplyr = ">=1.1.0"
 tidyselect = "*"
+bench = "*" # temporary
 
 [compiled-code]
 path = ["random/core-cpp/", "regression/src"]
@@ -28,8 +29,8 @@ RcppEigen = "*"
 BH = "*"
 dqrng = "*"
 
-[extras]
-bench = "*"
+# [extras]
+# bench = "*"
 
 # [tool.test]
 # framework = "testthat"
