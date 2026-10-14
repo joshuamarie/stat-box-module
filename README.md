@@ -16,38 +16,61 @@ package, not CRAN-style, rather a module that must be accessed through
 
 ## Installation
 
-You need to install `{carrier}` first. See the [installation
-guide](https://joshuamarie.com/carrier/installation.html) for the
+You need to install `{baler}` first. See the [installation
+guide](https://baler-dev.github.io/baler/installation.html) for the
 details.
 
 The package has no pre-built binaries yet, so the installation of
 `{statmodule}` has to be built from scratch.
 
 ``` bash
-carrier install gh:joshuamarie/stat-box-module --install-deps
+baler install --git https://github.com/joshuamarie/stat-box-module --install-deps
 ```
 
 ## Usage
 
 You can’t use `{statmodule}` by attaching it through `library()` or
 `::`, you need `{box}` R package. Currently, the current version of
-`{box}` cannot import `{statmodule}` being managed by `carrier`, you
+`{box}` cannot import `{statmodule}` being managed by `{baler}`, you
 have to install the patched forked version of `{box}` (see
-[details](https://joshuamarie.com/carrier/installation.html#the-box-fork)).
+[details](https://baler-dev.github.io/baler/installation.html#the-box-fork)).
 
 ``` r
 box::use(sm = statmodule)
 ```
 
-### Standard Math Module
+<!-- ### Standard Math Module -->
 
-`{statmodule}` has collection of mathematical functions, some were
-imported from the base R itself.
+<!-- `{statmodule}` has collection of mathematical functions, some were imported from the base R itself.  -->
+
+<!-- ```{r} -->
+
+<!-- sm$square(5) -->
+
+<!-- ``` -->
+
+### Regression models
+
+The standard linear regression (through `ols`) and generalized linear
+model (GLM) are available under `regression` submodule. They depend on
+`{RcppEigen}` package, which itself depends on `{Eigen}` C++ library.
+Here’s the following example:
 
 ``` r
-sm$square(5)
-#> [1] 25
+sm$regression$ols$linear_reg(mpg ~ disp + hp + wt + drat, data = mtcars, vif = TRUE)
 ```
+
+     Custom Linear Regression output: 
+
+    ────────────────────────────────────────────────────────────────────
+      terms  coefficients  std_err  t_statistic  pval  vif   tolerance  
+    ────────────────────────────────────────────────────────────────────
+      beta0     29.15       6.29       4.63      0.00                   
+      disp       0.00       0.01       0.35      0.73  8.21    0.12     
+       hp       -0.03       0.01       -3.00     0.01  2.89    0.34     
+       wt       -3.48       1.08       -3.23     0.00  5.10    0.20     
+      drat       1.77       1.32       1.34      0.19  2.28    0.44     
+    ────────────────────────────────────────────────────────────────────
 
 ### Random Number Generation
 

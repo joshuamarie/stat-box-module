@@ -20,28 +20,36 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-You need to install `{carrier}` first. See the [installation guide](https://joshuamarie.com/carrier/installation.html) for the details. 
+You need to install `{baler}` first. See the [installation guide](https://baler-dev.github.io/baler/installation.html) for the details. 
 
 The package has no pre-built binaries yet, so the installation of `{statmodule}` has to be built from scratch. 
 
 ``` bash
-carrier install gh:joshuamarie/stat-box-module --install-deps
+baler install --git https://github.com/joshuamarie/stat-box-module --install-deps
 ```
 
 ## Usage
 
-You can't use `{statmodule}` by attaching it through `library()` or `::`, you need `{box}` R package. Currently, the current version of `{box}` cannot import `{statmodule}` being managed by `carrier`, you have to install the patched forked version of `{box}` (see [details](https://joshuamarie.com/carrier/installation.html#the-box-fork)). 
+You can't use `{statmodule}` by attaching it through `library()` or `::`, you need `{box}` R package. Currently, the current version of `{box}` cannot import `{statmodule}` being managed by `{baler}`, you have to install the patched forked version of `{box}` (see [details](https://baler-dev.github.io/baler/installation.html#the-box-fork)). 
 
 ```{r}
 box::use(sm = statmodule)
 ```
 
-### Standard Math Module
+<!-- ### Standard Math Module -->
 
-`{statmodule}` has collection of mathematical functions, some were imported from the base R itself. 
+<!-- `{statmodule}` has collection of mathematical functions, some were imported from the base R itself.  -->
 
-```{r}
-sm$square(5)
+<!-- ```{r} -->
+<!-- sm$square(5) -->
+<!-- ``` -->
+
+### Regression models
+
+The standard linear regression (through `ols`) and generalized linear model (GLM) are available under `regression` submodule. They depend on `{RcppEigen}` package, which itself depends on `{Eigen}` C++ library. Here's the following example:
+
+```{r, collapse=FALSE, comment=NULL}
+sm$regression$ols$linear_reg(mpg ~ disp + hp + wt + drat, data = mtcars, vif = TRUE)
 ```
 
 ### Random Number Generation
@@ -52,6 +60,3 @@ sm$square(5)
 set.seed(123)
 sm$random$draw$normal(10L)
 ```
-
-
-
