@@ -1,5 +1,5 @@
 name: "Run executable scripts"
-description: "For the sake of integration of statmodule with `{carrier}`, let us verify its integration to `{carrier}` by running the scripts."
+description: "For the sake of integration of statmodule with `{baler}`, let us verify its integration to `{carrier}` by running the scripts."
 
 on:
     push:
@@ -38,21 +38,29 @@ jobs:
             #   run: |
             #       irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
 
-            # Linux & macOS
-            - name: "Carrier installation (Unix)"
-              if: runner.os != 'Windows'
-              shell: bash
+            - name: "Install rust toolchain"
               run: |
-                  curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh \
-                    | sed 's/arch=\$(uname -m)/arch=aarch64/' \
-                    | bash
+                  rustup toolchain install
+                  rustup show
             
-            # Windows
-            - name: "Carrier installation (Windows)"
-              if: runner.os == 'Windows'
-              shell: pwsh
-              run: |
-                  irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
+            - name: "Install baler"
+              run: cargo install --git https://github.com/baler-dev/baler --branch fix/toml-settings
+            
+            # # Linux & macOS
+            # - name: "Carrier installation (Unix)"
+            #   if: runner.os != 'Windows'
+            #   shell: bash
+            #   run: |
+            #       curl -LsSf https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.sh \
+            #         | sed 's/arch=\$(uname -m)/arch=aarch64/' \
+            #         | bash
+            
+            # # Windows
+            # - name: "Carrier installation (Windows)"
+            #   if: runner.os == 'Windows'
+            #   shell: pwsh
+            #   run: |
+            #       irm https://github.com/joshuamarie/carrier/releases/download/v0.2.3/carrier-installer.ps1 | iex
 
             - name: "R 4.5.1 Setup"
               uses: r-lib/actions/setup-r@v2
@@ -63,15 +71,15 @@ jobs:
             - name: "Install the patched {box} fork"
               run: |
                   Rscript -e 'install.packages("pak")'
-                  Rscript -e 'pak::pak("joshuamarie/box@feature/carrier-module-support")'
+                  Rscript -e 'pak::pak("joshuamarie/box@feature/baler-module-support")'
 
             - name: "Install statmodule (here)"
               shell: bash
               run: |
-                  # Make sure carrier is on PATH (especially important on Windows / Git Bash)
+                  # Make sure `baler` is on PATH (especially important on Windows / Git Bash)
                   export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
-                  carrier --version || true
-                  carrier install . --install-deps
+                  baler --version || true
+                  baler install --path . --install-deps
 
             - name: "Execute scripts from scripts/examples"
               shell: bash
