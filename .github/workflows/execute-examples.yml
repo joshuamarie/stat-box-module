@@ -79,7 +79,7 @@ jobs:
                   # Make sure `baler` is on PATH (especially important on Windows / Git Bash)
                   export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
                   baler --version || true
-                  baler install --path . --install-deps
+                  baler install --path . --install-deps --extras
 
             - name: "Execute scripts from scripts/examples"
               shell: bash
