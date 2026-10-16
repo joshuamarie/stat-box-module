@@ -44,7 +44,8 @@ jobs:
                   rustup show
             
             - name: "Install baler"
-              run: cargo install --locked --git https://github.com/baler-dev/baler --branch fix/toml-settings baler-cli
+              run: cargo install --git https://github.com/baler-dev/baler
+              # run: cargo install --locked --git https://github.com/baler-dev/baler --branch fix/toml-settings baler-cli
             
             # # Linux & macOS
             # - name: "Carrier installation (Unix)"
