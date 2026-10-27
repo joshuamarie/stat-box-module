@@ -18,7 +18,7 @@ dplyr = ">=1.1.0"
 tidyselect = "*"
 
 [compiled-code]
-path = ["random/core-cpp/", "regression/src"]
+path = ["random/core-cpp/", "regression/src", "time_series/core"]
 binary = true
 keep_source = false
 
