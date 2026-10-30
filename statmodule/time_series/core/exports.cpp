@@ -7,7 +7,7 @@ using Rcpp::as;
 // using tstk::acf; 
 
 extern "C" SEXP lag_cpp(SEXP x_, SEXP k_, SEXP fill_) {
-    return wrap(tstk::acf(
+    return wrap(tstk::lag(
         as<NumericVector>(x_),
         as<int>(k_),
         as<double>(fill_)
