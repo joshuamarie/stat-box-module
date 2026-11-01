@@ -70,12 +70,12 @@ jobs:
                   use-public-rspm: true
 
             - name: "Install the patched {box} fork"
-              run: |
-                  Rscript -e 'install.packages("pak")'
-                  Rscript -e 'pak::pak("joshuamarie/box@feature/lazy-imports")'
               # run: |
-              #     Rscript -e 'install.packages("pak")'                  
-              #     Rscript -e 'pak::pak("joshuamarie/box@feature/baler-support")'
+              #     Rscript -e 'install.packages("pak")'
+              #     Rscript -e 'pak::pak("joshuamarie/box@feature/lazy-imports")'
+              run: |
+                  Rscript -e 'install.packages("pak")'                  
+                  Rscript -e 'pak::pak("joshuamarie/box@feature/baler-support")'
 
             - name: "Install statmodule (here)"
               shell: bash
